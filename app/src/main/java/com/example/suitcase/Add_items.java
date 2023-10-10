@@ -12,12 +12,12 @@ import android.widget.Toast;
 
 import com.example.suitcase.databinding.ActivityAddItemsBinding;
 
-public class Add_Items extends AppCompatActivity {
+public class Add_items extends AppCompatActivity {
     ActivityAddItemsBinding binding;
     DatabaseHelper items_dbHelper;
     private Uri imageUri;
     public static Intent getIntent(Context context) {
-        return new Intent(context, Add_Items.class);
+        return new Intent(context, Add_items.class);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Add_Items extends AppCompatActivity {
     }
 
     private void pickImage(View view) {
-        ImagePickUtility.pickImage(view, Add_Items.this);
+        ImagePickUtility.pickImage(view, Add_items.this);
     }
 
     @Override

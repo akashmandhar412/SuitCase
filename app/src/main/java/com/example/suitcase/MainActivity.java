@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         items_dbHelper=new DatabaseHelper(this);
         setRecyclerView();
         setupItemTouchHelper();
-        binding.fab.setOnClickListener(view->startActivity(Add_Items.getIntent(getApplicationContext())));
+        binding.fab.setOnClickListener(view->startActivity(Add_items.getIntent(getApplicationContext())));
     }
     private void setupItemTouchHelper(){
         ItemTouchHelper itemTouchHelper=new ItemTouchHelper(

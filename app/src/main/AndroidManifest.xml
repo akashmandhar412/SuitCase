@@ -20,7 +20,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Add_Items"
+            android:name=".Add_items"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

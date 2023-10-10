@@ -26,7 +26,6 @@ public class Items_Details_Page extends AppCompatActivity {
     public static final int EDIT_ITEM_REQUEST=10001;
 
     // get Intent
-
     public static Intent getIntent(Context context,int id){
         Intent intent=new Intent(context,Items_Details_Page.class);
         intent.putExtra(ID,id);
