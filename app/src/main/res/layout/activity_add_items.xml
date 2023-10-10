@@ -9,12 +9,12 @@
     android:padding="10dp"
     android:gravity="center"
     android:background="@drawable/background"
-    tools:context=".Add_items">
+    tools:context=".Add_Items">
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/items_img"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/suitcase"
+        android:src="@drawable/addicon"
         app:civ_border_width="1dp"
         app:civ_border_color="@color/black"
         >
@@ -24,26 +24,32 @@
         android:id="@+id/item_name"
         android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:hint=" Enter Item Name"
         android:layout_marginTop="30dp"
+        android:textColor="@color/black"
+        android:textColorHint="#595959"
         android:inputType="text"
         />
     <EditText
         android:id="@+id/item_price"
         android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:hint=" Enter Item Price"
+        android:textColor="@color/black"
+        android:textColorHint="#595959"
         android:layout_marginTop="10dp"
-        android:inputType="number"
+        android:inputType="text"
         />
     <EditText
         android:id="@+id/item_description"
         android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:hint=" Enter Item Description"
+        android:textColor="@color/black"
+        android:textColorHint="#595959"
         android:layout_marginTop="10dp"
         android:inputType="text"
 
@@ -55,7 +61,7 @@
         android:text="Add Items"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:textSize="22sp"
+        android:textSize="25sp"
         android:layout_marginTop="10dp"
 
         />

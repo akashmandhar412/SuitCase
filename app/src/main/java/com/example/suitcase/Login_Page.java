@@ -11,15 +11,14 @@ import com.example.suitcase.databinding.ActivityLoginPageBinding;
 
 public class Login_Page extends AppCompatActivity {
     ActivityLoginPageBinding binding;
-    Database_Helper databaseHelper;
+    DatabaseHelper databaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityLoginPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        getSupportActionBar().hide();
 
-        databaseHelper=new Database_Helper(this);
+        databaseHelper= new DatabaseHelper(this);
 
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +43,7 @@ public class Login_Page extends AppCompatActivity {
         binding.txtForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),resetPassword.class);
+                Intent intent=new Intent(getApplicationContext(),ForgotPasswordPage.class);
                 startActivity(intent);
             }
         });

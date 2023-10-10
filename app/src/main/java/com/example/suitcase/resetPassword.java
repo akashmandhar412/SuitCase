@@ -11,7 +11,7 @@ import com.example.suitcase.databinding.ActivityResetPasswordBinding;
 public class resetPassword extends AppCompatActivity {
     ActivityResetPasswordBinding binding;
 
-    Database_Helper databaseHelper;
+    DatabaseHelper databaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +19,7 @@ public class resetPassword extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         getSupportActionBar().hide();
-        databaseHelper = new Database_Helper(this);
+        databaseHelper = new DatabaseHelper(this);
 
         binding.resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override

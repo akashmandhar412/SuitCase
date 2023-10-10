@@ -28,13 +28,16 @@
         android:layout_marginTop="10dp"
         android:layout_below="@+id/addItem_dummyImg"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:focusable="true"
         android:focusableInTouchMode="true">
         <EditText
             android:id="@+id/txt_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
+            android:drawableStart="@drawable/ic_baseline_email_24"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
             android:hint="Enter Email"
             android:textColorHint="@color/black"
             android:inputType="text"
@@ -53,8 +56,11 @@
         <EditText
             android:id="@+id/txt_password"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:hint="Enter Password"
+            android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:drawablePadding="8dp"
+            android:padding="8dp"
             android:textColorHint="@color/black"
             android:inputType="textPassword"
             />
@@ -64,7 +70,7 @@
     <Button
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_marginTop="10dp"
         android:text="Login"
         android:textSize="28sp"
@@ -76,11 +82,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Forgot Password"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textColor="@color/design_default_color_error"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:textStyle="normal"
+        android:textStyle="bold"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Don't have an Account? "
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/white"/>
         <TextView
             android:id="@+id/txt_signup"

@@ -11,15 +11,14 @@ import com.example.suitcase.databinding.ActivitySignupPageBinding;
 
 public class Signup_Page extends AppCompatActivity {
     ActivitySignupPageBinding binding;
-    Database_Helper databaseHelper;
+    DatabaseHelper databaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivitySignupPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        databaseHelper=new Database_Helper(this);
+        databaseHelper=new DatabaseHelper(this);
 
-        getSupportActionBar().hide();
         //Click to signup button
         binding.signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
