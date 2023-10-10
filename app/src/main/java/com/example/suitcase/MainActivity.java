@@ -47,17 +47,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id=item.getItemId();
-                if (id==R.id.item_home){
-                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                    startActivity(intent);
-                    Toast.makeText(MainActivity.this, "Click to home ", Toast.LENGTH_SHORT).show();
+                switch (id)
+                {
+
+                    case R.id.item_home:
+                        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                        Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case R.id.item_logOut:
+                        confirmLogoutDialog();
+                        binding.drawer.closeDrawer(GravityCompat.START);
+                        break;
+                    default:
+                        return true;
+
                 }
-                if (id==R.id.item_about){
-                    Toast.makeText(MainActivity.this, "Clickto about ", Toast.LENGTH_SHORT).show();
-                }
-                return false;
+                return true;
             }
         });
+        // Set an OnClickListener for the shareAll button
+        binding.shareAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareAllItems();
+            }
+        });
+
         final DrawerLayout drawerLayout=findViewById(R.id.drawer);
         findViewById(R.id.nav_menu).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +91,41 @@ public class MainActivity extends AppCompatActivity {
         setupItemTouchHelper();
         binding.fab.setOnClickListener(view->startActivity(Add_items.getIntent(getApplicationContext())));
     }
+
+    private void shareAllItems() {
+        StringBuilder messageBuilder = new StringBuilder("--------ALL ITEMS LISTS--------\n\n");
+        int itemNumber = 1;
+
+        for (int i = 0; i < itemsModels.size(); i++) {
+            ItemsModel item = itemsModels.get(i);
+            String itemName = item.getName();
+            double itemPrice = item.getPrice();
+            String itemDescription = item.getDescription();
+
+            // Append item number and details to the message
+            messageBuilder.append(itemNumber).append(".\n")
+                    .append("Item: ").append(itemName).append("\n")
+                    .append("Price: ").append(itemPrice).append("\n")
+                    .append("Description: ").append(itemDescription).append("\n\n");
+
+            itemNumber++; // Increment the item number
+        }
+
+        String message = messageBuilder.toString().trim();
+
+        // Create an intent to share the item information
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, message);
+
+        // Check if there is an app available to handle the intent
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "No messaging app found to share.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void setupItemTouchHelper(){
         ItemTouchHelper itemTouchHelper=new ItemTouchHelper(
                 new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
@@ -159,4 +212,28 @@ public class MainActivity extends AppCompatActivity {
         binding.recycler.setLayoutManager(new LinearLayoutManager(this));
         binding.recycler.setAdapter(itemsAdapter);
     }
+    void confirmLogoutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Log out from SuitCase?");
+        builder.setMessage("Are you sure you want to log out?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(MainActivity.this, Login_Page.class);
+                startActivity(intent);
+                finish();
+                Toast.makeText(MainActivity.this, "Logged out from SuitCase!", Toast.LENGTH_SHORT).show();
+                overridePendingTransition(0, 0);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //if user click No on the dialogue box user stays in the same page
+            }
+        });
+        // Show the dialog
+        builder.create().show();
+    }
 }
+

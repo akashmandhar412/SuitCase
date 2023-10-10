@@ -47,7 +47,10 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/ic_baseline_search_24"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/shareAll"
+                android:src="@drawable/ic_baseline_share_24"
                 android:scaleType="centerCrop"
                 android:layout_marginStart="75dp"/>
         </LinearLayout>

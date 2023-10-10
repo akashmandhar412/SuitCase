@@ -18,7 +18,6 @@ public class resetPassword extends AppCompatActivity {
         binding=ActivityResetPasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        getSupportActionBar().hide();
         databaseHelper = new DatabaseHelper(this);
 
         binding.resetBtn.setOnClickListener(new View.OnClickListener() {

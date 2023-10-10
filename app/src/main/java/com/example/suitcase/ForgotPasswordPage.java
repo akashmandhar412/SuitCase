@@ -29,7 +29,7 @@ public class ForgotPasswordPage extends AppCompatActivity {
                     intent.putExtra("email",email);
                     startActivity(intent);
                 }else {
-                    Toast.makeText(ForgotPasswordPage.this, "Email does not exists", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgotPasswordPage.this, "Invalid Email", Toast.LENGTH_SHORT).show();
                 }
             }
         });

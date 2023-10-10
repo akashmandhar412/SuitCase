@@ -4,16 +4,8 @@
         android:title="Home"
         android:icon="@drawable/ic_baseline_home_24"/>
 
-    <item android:id="@+id/item_about"
-        android:title="About"
-        android:icon="@drawable/ic_baseline_info_24"/>
-
-    <item android:id="@+id/item_contact"
-        android:title="Contact"
-        android:icon="@drawable/ic_baseline_call_24"/>
-
-    <item android:id="@+id/item_setting"
-        android:title="Setting"
-        android:icon="@drawable/ic_baseline_settings_24"/>
+    <item android:id="@+id/item_logOut"
+        android:title="Logout"
+        android:icon="@drawable/ic_baseline_logout_24"/>
 
 </menu>

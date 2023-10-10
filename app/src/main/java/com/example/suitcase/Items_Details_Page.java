@@ -50,7 +50,7 @@ public class Items_Details_Page extends AppCompatActivity {
         item=retrieveData(id);
         binding.imageViewItem.setImageURI(item.getImage());
         binding.textViewName.setText(item.getName());
-        //binding.textViewPrice.setText(item.getPrice().toString());
+        binding.textViewPrice.setText(String.valueOf(item.getPrice()));
         binding.textViewDescription.setText(item.getDescription());
 
         //click Method of Edit Button
@@ -86,10 +86,23 @@ public class Items_Details_Page extends AppCompatActivity {
         return itemsModel;
     }
     public void startShareItemActivity(View view){
-        Intent intent=new Intent(Intent.ACTION_SEND);
+        // Create a shareable message containing item details
+        String shareMessage = "Item Name: " + item.getName() + "\n" +
+                "Price: " + item.getPrice() + "\n" +
+                "Description: " + item.getDescription();
+
+        // Create an intent to share the message
+        Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT,"");
-        intent.putExtra(Intent.EXTRA_TEXT,"Check Your Cool Application ");
-        startActivity(Intent.createChooser(intent,"Share via"));
+        intent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+
+        // Check if there's an app that can handle the intent
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            // Start the share intent
+            startActivity(Intent.createChooser(intent, "Share via"));
+        } else {
+            // Handle the case where no app is available to share
+            Toast.makeText(Items_Details_Page.this, "No app available to share", Toast.LENGTH_SHORT).show();
+        }
     }
 }
