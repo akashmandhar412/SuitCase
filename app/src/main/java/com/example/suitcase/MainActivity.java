@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +29,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding  binding;
@@ -125,19 +129,19 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "No messaging app found to share.", Toast.LENGTH_SHORT).show();
         }
     }
-
-    private void setupItemTouchHelper(){
-        ItemTouchHelper itemTouchHelper=new ItemTouchHelper(
-                new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
+    private void setupItemTouchHelper() {
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
                     @Override
                     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                         return false;
                     }
+
                     @Override
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                        int position=viewHolder.getAdapterPosition();
-                        ItemsModel itemsModel=itemsModels.get(position);
-                        if (direction==ItemTouchHelper.LEFT){
+                        int position = viewHolder.getAdapterPosition();
+                        ItemsModel itemsModel = itemsModels.get(position);
+                        if (direction == ItemTouchHelper.LEFT) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                             builder.setTitle("Delete");
                             builder.setMessage("Do you really want to delete this item?");
@@ -158,8 +162,7 @@ public class MainActivity extends AppCompatActivity {
                             });
                             AlertDialog dialog = builder.create();
                             dialog.show();
-
-                        }else if(direction==ItemTouchHelper.RIGHT){
+                        } else if (direction == ItemTouchHelper.RIGHT) {
                             itemsModel.setPurchased(true);
                             items_dbHelper.update(
                                     itemsModel.getId(),
@@ -170,13 +173,27 @@ public class MainActivity extends AppCompatActivity {
                                     itemsModel.isPurchased()
                             );
                             itemsAdapter.notifyItemChanged(position);
-                            Toast.makeText(MainActivity.this, "Item Purchased ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Item Purchased", Toast.LENGTH_SHORT).show();
                         }
+                    }
+
+                    @Override
+                    public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                        new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                                .addSwipeLeftBackgroundColor(Color.parseColor("#FFDD6B55"))
+                                .addSwipeLeftActionIcon(R.drawable.ic_baseline_delete_forever_24)
+                                .addSwipeRightBackgroundColor(Color.parseColor("#FF9AEB9D"))
+                                .addSwipeRightActionIcon(R.drawable.ic_baseline_add_24)
+                                .create()
+                                .decorate();
+
+                        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
                     }
                 }
         );
         itemTouchHelper.attachToRecyclerView(binding.recycler);
     }
+
 
     @Override
     protected void onStart() {
